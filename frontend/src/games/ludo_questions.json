@@ -1,0 +1,315 @@
+[
+    {
+      "id": 1,
+      "subject": "Mathematics",
+      "question": "What is the least common multiple (LCM) of 6 and 8?",
+      "answer": "24"
+    },
+    {
+      "id": 2,
+      "subject": "Mathematics",
+      "question": "Simplify: 3/4 + 2/3 = ?",
+      "answer": "17/12"
+    },
+    {
+      "id": 3,
+      "subject": "Mathematics",
+      "question": "What is the area of a square with side 12 cm?",
+      "answer": "144 cm²"
+    },
+    {
+      "id": 4,
+      "subject": "Mathematics",
+      "question": "Convert 2.5 km into meters.",
+      "answer": "2500 meters"
+    },
+    {
+      "id": 5,
+      "subject": "Mathematics",
+      "question": "Write the Roman numeral for 49.",
+      "answer": "XLIX"
+    },
+    {
+      "id": 6,
+      "subject": "Mathematics",
+      "question": "Find the perimeter of a rectangle with length 15 cm and breadth 8 cm.",
+      "answer": "46 cm"
+    },
+    {
+      "id": 7,
+      "subject": "Mathematics",
+      "question": "Express 0.45 as a fraction in simplest form.",
+      "answer": "9/20"
+    },
+    {
+      "id": 8,
+      "subject": "Mathematics",
+      "question": "Solve: 180 ÷ 15 = ?",
+      "answer": "12"
+    },
+    {
+      "id": 9,
+      "subject": "Mathematics",
+      "question": "Write the first 5 multiples of 9.",
+      "answer": "9, 18, 27, 36, 45"
+    },
+    {
+      "id": 10,
+      "subject": "Mathematics",
+      "question": "Find the simple interest on ₹2000 at 5% per annum for 2 years.",
+      "answer": "₹200"
+    },
+    {
+      "id": 11,
+      "subject": "Mathematics",
+      "question": "What is the average of 12, 18, and 24?",
+      "answer": "18"
+    },
+    {
+      "id": 12,
+      "subject": "Science",
+      "question": "Which gas is essential for respiration?",
+      "answer": "Oxygen"
+    },
+    {
+      "id": 13,
+      "subject": "Science",
+      "question": "Name the planet known as the “Red Planet.”",
+      "answer": "Mars"
+    },
+    {
+      "id": 14,
+      "subject": "Science",
+      "question": "What is the boiling point of water in Celsius?",
+      "answer": "100°C"
+    },
+    {
+      "id": 15,
+      "subject": "Science",
+      "question": "What is the unit of force?",
+      "answer": "Newton"
+    },
+    {
+      "id": 16,
+      "subject": "Science",
+      "question": "Which part of the plant makes food?",
+      "answer": "Leaf"
+    },
+    {
+      "id": 17,
+      "subject": "Science",
+      "question": "What is the function of the rib cage?",
+      "answer": "Protects heart and lungs"
+    },
+    {
+      "id": 18,
+      "subject": "Science",
+      "question": "Which organ pumps blood in our body?",
+      "answer": "Heart"
+    },
+    {
+      "id": 19,
+      "subject": "Science",
+      "question": "Name two renewable sources of energy.",
+      "answer": "Solar energy, Wind energy"
+    },
+    {
+      "id": 20,
+      "subject": "Science",
+      "question": "What is the chemical symbol of Sodium?",
+      "answer": "Na"
+    },
+    {
+      "id": 21,
+      "subject": "Science",
+      "question": "What type of energy does a moving car have?",
+      "answer": "Kinetic energy"
+    },
+    {
+      "id": 22,
+      "subject": "Science",
+      "question": "What is the process by which plants prepare their food?",
+      "answer": "Photosynthesis"
+    },
+    {
+      "id": 23,
+      "subject": "Social Science",
+      "question": "Who was the first Mughal emperor of India?",
+      "answer": "Babur"
+    },
+    {
+      "id": 24,
+      "subject": "Social Science",
+      "question": "What is the capital of Japan?",
+      "answer": "Tokyo"
+    },
+    {
+      "id": 25,
+      "subject": "Social Science",
+      "question": "Name the river called “Ganga of the South.”",
+      "answer": "Godavari"
+    },
+    {
+      "id": 26,
+      "subject": "Social Science",
+      "question": "Who is known as the “Father of the Nation” in India?",
+      "answer": "Mahatma Gandhi"
+    },
+    {
+      "id": 27,
+      "subject": "Social Science",
+      "question": "Name one major occupation of people in deserts.",
+      "answer": "Animal rearing"
+    },
+    {
+      "id": 28,
+      "subject": "Social Science",
+      "question": "In which state is the city of Jaipur located?",
+      "answer": "Rajasthan"
+    },
+    {
+      "id": 29,
+      "subject": "Social Science",
+      "question": "What is the National Animal of India?",
+      "answer": "Tiger"
+    },
+    {
+      "id": 30,
+      "subject": "Social Science",
+      "question": "Who was the first President of India?",
+      "answer": "Dr. Rajendra Prasad"
+    },
+    {
+      "id": 31,
+      "subject": "Social Science",
+      "question": "Name one physical division of India.",
+      "answer": "The Himalayas"
+    },
+    {
+      "id": 32,
+      "subject": "Social Science",
+      "question": "Where is the Parliament House of India located?",
+      "answer": "New Delhi"
+    },
+    {
+      "id": 33,
+      "subject": "English",
+      "question": "Choose the correct: He ___ (is/are) going to school.",
+      "answer": "is"
+    },
+    {
+      "id": 34,
+      "subject": "English",
+      "question": "Give the antonym of “Hot.”",
+      "answer": "Cold"
+    },
+    {
+      "id": 35,
+      "subject": "English",
+      "question": "Identify the noun: The cat is sleeping on the sofa.",
+      "answer": "cat, sofa"
+    },
+    {
+      "id": 36,
+      "subject": "English",
+      "question": "Fill in the blank: I ___ (eat/ate) an apple yesterday.",
+      "answer": "ate"
+    },
+    {
+      "id": 37,
+      "subject": "English",
+      "question": "Make a sentence using the word “beautiful.”",
+      "answer": "Example: The garden is very beautiful."
+    },
+    {
+      "id": 38,
+      "subject": "English",
+      "question": "What is the past tense of “run”?",
+      "answer": "ran"
+    },
+    {
+      "id": 39,
+      "subject": "English",
+      "question": "Rearrange into a sentence: book / the / reading / is / Riya.",
+      "answer": "Riya is reading the book."
+    },
+    {
+      "id": 40,
+      "subject": "English",
+      "question": "What is the plural of “child”?",
+      "answer": "children"
+    },
+    {
+      "id": 41,
+      "subject": "English",
+      "question": "Write the synonym of “happy.”",
+      "answer": "joyful"
+    },
+    {
+      "id": 42,
+      "subject": "English",
+      "question": "Identify the adjective: She wore a red dress.",
+      "answer": "red"
+    },
+    {
+      "id": 43,
+      "subject": "General Knowledge",
+      "question": "Who is the current Prime Minister of India?",
+      "answer": "Narendra Modi"
+    },
+    {
+      "id": 44,
+      "subject": "General Knowledge",
+      "question": "How many continents are there in the world?",
+      "answer": "7"
+    },
+    {
+      "id": 45,
+      "subject": "General Knowledge",
+      "question": "Which is the largest ocean?",
+      "answer": "Pacific Ocean"
+    },
+    {
+      "id": 46,
+      "subject": "General Knowledge",
+      "question": "In which country are the pyramids located?",
+      "answer": "Egypt"
+    },
+    {
+      "id": 47,
+      "subject": "General Knowledge",
+      "question": "Which bird is known as the “National Bird of India”?",
+      "answer": "Peacock"
+    },
+    {
+      "id": 48,
+      "subject": "General Knowledge",
+      "question": "What is the currency of the USA?",
+      "answer": "Dollar"
+    },
+    {
+      "id": 49,
+      "subject": "General Knowledge",
+      "question": "How many players are there in a cricket team?",
+      "answer": "11"
+    },
+    {
+      "id": 50,
+      "subject": "General Knowledge",
+      "question": "Which is the tallest mountain in the world?",
+      "answer": "Mount Everest"
+    },
+    {
+      "id": 51,
+      "subject": "General Knowledge",
+      "question": "Which festival is known as the Festival of Lights?",
+      "answer": "Diwali"
+    },
+    {
+      "id": 52,
+      "subject": "General Knowledge",
+      "question": "Who invented the light bulb?",
+      "answer": "Thomas Edison"
+    }
+  ]
+  
