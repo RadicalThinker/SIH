@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { logout } from "../../store/slices/authSlice";
@@ -14,6 +14,16 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const handleToggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
+
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false);
+  };
 
   const handleLogout = () => {
     dispatch(logout());
@@ -66,7 +76,23 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Sidebar */}
-      <div className="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
+      {/* Overlay for mobile */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black bg-opacity-30 lg:hidden"
+          onClick={handleCloseSidebar}
+          onTouchStart={handleCloseSidebar}
+        />
+      )}
+
+      <div
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0`}
+        role="dialog"
+        aria-modal="true"
+        aria-label={t("Navigation")}
+      >
         <div className="flex items-center justify-center h-16 px-4 border-b border-gray-200">
           <div className="flex items-center">
             <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
@@ -103,6 +129,7 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
                       ? "bg-blue-100 text-blue-700"
                       : "text-gray-700 hover:bg-gray-100"
                   }`}
+                  onClick={handleCloseSidebar}
                 >
                   <svg
                     className="mr-3 h-5 w-5"
@@ -177,7 +204,14 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
         <div className="sticky top-0 z-40 bg-white border-b border-gray-200">
           <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
             <div className="flex items-center">
-              <button className="lg:hidden p-2 text-gray-600 hover:text-gray-900">
+              <button
+                className="lg:hidden p-2 text-gray-600 hover:text-gray-900"
+                aria-label={t("Open navigation menu")}
+                aria-expanded={isSidebarOpen}
+                aria-controls="mobile-sidebar"
+                onClick={handleToggleSidebar}
+                onTouchStart={handleToggleSidebar}
+              >
                 <svg
                   className="h-6 w-6"
                   fill="none"
