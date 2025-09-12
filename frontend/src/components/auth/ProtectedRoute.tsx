@@ -1,7 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { RootState } from "../../store";
+// import { RootState } from "../../store";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
-  userType,
+  // userType, // commented out since it's not used in demo mode
 }) => {
   // For MVP demo - allow access without authentication
   // Remove this in production

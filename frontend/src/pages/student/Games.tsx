@@ -144,8 +144,8 @@ const Games: React.FC = () => {
       </div>
 
       {/* Difficulty Filter */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Filter by Difficulty</h3>
+      <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Filter by Difficulty</h3>
         <div className="flex flex-wrap gap-3">
           {difficulties.map((difficulty) => (
             <button
@@ -154,7 +154,7 @@ const Games: React.FC = () => {
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                 selectedDifficulty === difficulty
                   ? 'bg-blue-600 text-white shadow-lg transform scale-105'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700'
               }`}
             >
               {difficulty === 'all' ? 'All Games' : difficulty}
@@ -168,42 +168,42 @@ const Games: React.FC = () => {
         {filteredGames.map((game) => (
           <div
             key={game.id}
-            className={`${game.bgColor} rounded-xl p-6 border-2 border-transparent hover:border-gray-300 transition-all duration-300 hover:shadow-lg hover:transform hover:scale-105 cursor-pointer group`}
+            className={`${game.bgColor} dark:bg-white/5 rounded-xl p-6 border-2 border-transparent dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all duration-300 hover:shadow-lg hover:transform hover:scale-105 cursor-pointer group backdrop-blur-sm`}
           >
             <div className="flex items-start justify-between mb-4">
-              <div className="h-16 w-16 bg-white rounded-xl flex items-center justify-center text-3xl shadow-sm group-hover:scale-110 transition-transform duration-300">
+              <div className="h-16 w-16 bg-white dark:bg-gray-800 dark:text-white rounded-xl flex items-center justify-center text-3xl shadow-sm group-hover:scale-110 transition-transform duration-300">
                 {game.icon}
               </div>
               <div className="text-right">
                 <div className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                  game.difficulty === 'Easy' ? 'bg-green-100 text-green-800' :
-                  game.difficulty === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
-                  'bg-red-100 text-red-800'
+                  game.difficulty === 'Easy' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' :
+                  game.difficulty === 'Medium' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300' :
+                  'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
                 }`}>
                   {game.difficulty}
                 </div>
                 {game.completed && (
                   <div className="mt-1">
-                    <span className="text-green-600 text-sm font-medium">✓ Completed</span>
+                    <span className="text-green-600 dark:text-green-400 text-sm font-medium">✓ Completed</span>
                   </div>
                 )}
               </div>
             </div>
 
-            <h3 className={`text-xl font-bold ${game.color} mb-2`}>
+            <h3 className={`text-xl font-bold ${game.color} dark:text-white mb-2`}>
               {game.title}
             </h3>
             
-            <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">
               {game.description}
             </p>
 
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-gray-500 dark:text-gray-400">
                   <span className="font-medium">{game.subject}</span>
                 </div>
-                <div className="flex items-center text-yellow-600">
+                <div className="flex items-center text-yellow-600 dark:text-yellow-300">
                   <span className="text-sm font-medium">{game.points} pts</span>
                 </div>
               </div>
@@ -212,7 +212,7 @@ const Games: React.FC = () => {
                 onClick={() => navigate(`/student/games/${game.id}`)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   game.completed
-                    ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                    ? 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-900/50'
                     : 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-xl'
                 }`}
               >
@@ -224,34 +224,34 @@ const Games: React.FC = () => {
       </div>
 
       {/* Achievement Section */}
-      <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-6 border border-yellow-200">
+      <div className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/10 dark:to-orange-900/10 rounded-xl p-6 border border-yellow-200 dark:border-yellow-900/30">
         <div className="flex items-center mb-4">
           <div className="h-10 w-10 bg-yellow-500 rounded-lg flex items-center justify-center mr-3">
             <span className="text-white text-xl">🏅</span>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">Recent Achievements</h3>
-            <p className="text-sm text-gray-600">Keep up the great work!</p>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Recent Achievements</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Keep up the great work!</p>
           </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white rounded-lg p-4 border border-yellow-200">
+          <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-yellow-200 dark:border-yellow-900/30">
             <div className="flex items-center">
               <span className="text-2xl mr-3">🎯</span>
               <div>
-                <p className="font-medium text-gray-900">First Game Complete</p>
-                <p className="text-sm text-gray-600">You completed your first game!</p>
+                <p className="font-medium text-gray-900 dark:text-gray-100">First Game Complete</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">You completed your first game!</p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white rounded-lg p-4 border border-yellow-200">
+          <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-yellow-200 dark:border-yellow-900/30">
             <div className="flex items-center">
               <span className="text-2xl mr-3">⚡</span>
               <div>
-                <p className="font-medium text-gray-900">Speed Learner</p>
-                <p className="text-sm text-gray-600">Completed 2 games in one day!</p>
+                <p className="font-medium text-gray-900 dark:text-gray-100">Speed Learner</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">Completed 2 games in one day!</p>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import Dexie, { Table } from 'dexie'
-import { Lesson, Game, Progress, GameScore, Badge } from '@types/index'
+import { Lesson, Game, Progress, GameScore, Badge } from '../types/index'
 
 // Offline database interfaces
 export interface OfflineLesson extends Omit<Lesson, '_id' | 'createdAt' | 'updatedAt'> {
@@ -75,12 +75,12 @@ class OfflineDatabase extends Dexie {
     })
 
     // Hooks for automatic cleanup and maintenance
-    this.cachedAssets.hook('creating', (primKey, obj, trans) => {
-      obj.lastAccessed = new Date()
+    this.cachedAssets.hook('creating', (_primKey, obj, _trans) => {
+      (obj as any).lastAccessed = new Date()
     })
 
-    this.cachedAssets.hook('updating', (modifications, primKey, obj, trans) => {
-      modifications.lastAccessed = new Date()
+    this.cachedAssets.hook('updating', (modifications, _primKey, _obj, _trans) => {
+      (modifications as any).lastAccessed = new Date()
     })
   }
 
@@ -88,9 +88,9 @@ class OfflineDatabase extends Dexie {
   async downloadLesson(lesson: Lesson, language: 'en' | 'hi' | 'or' = 'en'): Promise<void> {
     const offlineLesson: OfflineLesson = {
       ...lesson,
-      id: lesson._id,
+      id: (lesson as any)._id || lesson.id,
       language,
-      lastUpdated: lesson.updatedAt,
+      lastUpdated: (lesson as any).updatedAt || lesson.lastUpdated || new Date(),
       downloadedAt: new Date()
     }
     
@@ -143,10 +143,11 @@ class OfflineDatabase extends Dexie {
 
   // Game management
   async downloadGame(game: Game): Promise<void> {
+    const gameId = (game as any)._id || game.id;
     const offlineGame: OfflineGame = {
       ...game,
-      id: game._id,
-      lastUpdated: game.updatedAt,
+      id: gameId,
+      lastUpdated: (game as any).updatedAt || new Date(),
       downloadedAt: new Date(),
       assetsDownloaded: false
     }
@@ -155,7 +156,7 @@ class OfflineDatabase extends Dexie {
     
     // Download game assets in background
     this.downloadGameAssets(game).then(() => {
-      this.games.update(game._id, { assetsDownloaded: true })
+      this.games.update(gameId, { assetsDownloaded: true })
     })
   }
 
@@ -206,7 +207,7 @@ class OfflineDatabase extends Dexie {
   async saveProgress(progress: Partial<Progress>): Promise<string> {
     const offlineProgress: OfflineProgress = {
       ...progress as Progress,
-      id: progress._id || `progress_${Date.now()}_${Math.random()}`,
+      id: (progress as any)._id || `progress_${Date.now()}_${Math.random()}`,
       synced: false,
       lastModified: new Date()
     }
@@ -218,7 +219,7 @@ class OfflineDatabase extends Dexie {
   async saveGameScore(gameScore: Partial<GameScore>): Promise<string> {
     const offlineGameScore: OfflineGameScore = {
       ...gameScore as GameScore,
-      id: gameScore._id || `score_${Date.now()}_${Math.random()}`,
+      id: (gameScore as any)._id || `score_${Date.now()}_${Math.random()}`,
       timestamp: gameScore.timestamp || new Date(),
       synced: false
     }
@@ -228,11 +229,11 @@ class OfflineDatabase extends Dexie {
   }
 
   async getUnsyncedProgress(): Promise<OfflineProgress[]> {
-    return this.progress.where('synced').equals(false).toArray()
+    return this.progress.where('synced').equals(0).toArray()
   }
 
   async getUnsyncedGameScores(): Promise<OfflineGameScore[]> {
-    return this.gameScores.where('synced').equals(false).toArray()
+    return this.gameScores.where('synced').equals(0).toArray()
   }
 
   // Sync management
@@ -264,9 +265,9 @@ class OfflineDatabase extends Dexie {
 
   async getPendingUploadsCount(): Promise<number> {
     const [progressCount, scoresCount, badgesCount] = await Promise.all([
-      this.progress.where('synced').equals(false).count(),
-      this.gameScores.where('synced').equals(false).count(),
-      this.badges.where('synced').equals(false).count()
+      this.progress.where('synced').equals(0).count(),
+      this.gameScores.where('synced').equals(0).count(),
+      this.badges.where('synced').equals(0).count()
     ])
     
     return progressCount + scoresCount + badgesCount

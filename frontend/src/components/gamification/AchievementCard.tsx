@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Achievement } from '@types/index'
+import { Achievement } from '../../types/index'
 import { useGamification } from '@hooks/useGamification'
 import { motion } from 'framer-motion'
 

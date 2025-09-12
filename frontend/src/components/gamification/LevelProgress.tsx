@@ -22,7 +22,7 @@ const LevelProgress: React.FC<LevelProgressProps> = ({
 
   // Calculate progress to next level
   const currentLevelPoints = totalPoints - pointsToNextLevel
-  const nextLevelThreshold = totalPoints + pointsToNextLevel
+  // const nextLevelThreshold = totalPoints + pointsToNextLevel // commented out as unused
   const progressPercentage = pointsToNextLevel > 0 
     ? (currentLevelPoints / (currentLevelPoints + pointsToNextLevel)) * 100 
     : 100
@@ -48,7 +48,7 @@ const LevelProgress: React.FC<LevelProgressProps> = ({
             <div className={`font-bold text-primary-600 ${config.text}`}>
               {t('dashboard.level', { level: currentLevel })}
             </div>
-            <div className="text-xs text-gray-500 mt-1">
+            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               {totalPoints} {t('dashboard.points')}
             </div>
           </div>
@@ -56,7 +56,7 @@ const LevelProgress: React.FC<LevelProgressProps> = ({
         
         {pointsToNextLevel > 0 && (
           <div className={`text-center ${config.text}`}>
-            <div className="text-gray-600">
+            <div className="text-gray-600 dark:text-gray-300">
               {t('dashboard.nextLevel', { points: pointsToNextLevel })}
             </div>
           </div>
@@ -66,12 +66,12 @@ const LevelProgress: React.FC<LevelProgressProps> = ({
   }
 
   return (
-    <div className="bg-white rounded-lg p-4 shadow-soft">
+    <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg p-4 shadow-soft border border-gray-200 dark:border-gray-800">
       <div className="flex items-center justify-between mb-3">
         <div className={`font-bold text-primary-600 ${config.text}`}>
           {t('dashboard.level', { level: currentLevel })}
         </div>
-        <div className={`bg-primary-100 text-primary-800 rounded-full font-medium ${config.badge}`}>
+        <div className={`bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 rounded-full font-medium ${config.badge}`}>
           {totalPoints} {t('dashboard.points')}
         </div>
       </div>
@@ -86,12 +86,12 @@ const LevelProgress: React.FC<LevelProgressProps> = ({
               transition={{ duration: 1, ease: "easeOut" }}
             />
           </div>
-          <div className="text-sm text-gray-600 text-center">
+          <div className="text-sm text-gray-600 dark:text-gray-300 text-center">
             {t('dashboard.nextLevel', { points: pointsToNextLevel })}
           </div>
         </>
       ) : (
-        <div className="text-center text-sm text-green-600 font-medium">
+        <div className="text-center text-sm text-green-600 dark:text-green-400 font-medium">
           🎉 {t('achievements.congratulations')}! Max level reached!
         </div>
       )}

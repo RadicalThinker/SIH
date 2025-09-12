@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { logout } from "../../store/slices/authSlice";
 import { useTranslation } from "react-i18next";
+import { setTheme } from "../../store/slices/uiSlice";
 
 interface LayoutProps {
   userType: "student" | "teacher" | "admin";
@@ -14,6 +15,7 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
+  const { theme } = useAppSelector((state) => state.ui);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -29,7 +31,12 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
     dispatch(logout());
   };
 
-  const navigation = {
+  const cycleTheme = () => {
+    const next = theme === 'light' ? 'dark' : theme === 'dark' ? 'auto' : 'light';
+    dispatch(setTheme(next));
+  };
+
+  const navigation: Record<"student" | "teacher" | "admin", { name: string; href: string; icon: string }[]> = {
     student: [
       {
         name: t("Dashboard"),
@@ -69,12 +76,19 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
         icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z",
       },
     ],
+    admin: [
+      {
+        name: t("Dashboard"),
+        href: "/admin/dashboard",
+        icon: "M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z",
+      },
+    ],
   };
 
   const currentNav = navigation[userType] || [];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Sidebar */}
       {/* Overlay for mobile */}
       {isSidebarOpen && (
@@ -86,14 +100,14 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
       )}
 
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transform transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}
         role="dialog"
         aria-modal="true"
         aria-label={t("Navigation")}
       >
-        <div className="flex items-center justify-center h-16 px-4 border-b border-gray-200">
+        <div className="flex items-center justify-center h-16 px-4 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center">
             <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <svg
@@ -110,7 +124,7 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
                 />
               </svg>
             </div>
-            <span className="ml-2 text-xl font-semibold text-gray-900">
+            <span className="ml-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
               STEMशक्ति
             </span>
           </div>
@@ -126,13 +140,13 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
                   to={item.href}
                   className={`flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                     isActive
-                      ? "bg-blue-100 text-blue-700"
-                      : "text-gray-700 hover:bg-gray-100"
+                      ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
+                      : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
                   }`}
                   onClick={handleCloseSidebar}
                 >
                   <svg
-                    className="mr-3 h-5 w-5"
+                    className="mr-3 h-5 w-5 text-gray-600 dark:text-gray-300"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -152,11 +166,11 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
         </nav>
 
         {/* User Info */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 dark:border-gray-800">
           <div className="flex items-center">
-            <div className="h-8 w-8 bg-gray-300 rounded-full flex items-center justify-center">
+            <div className="h-8 w-8 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center justify-center">
               <svg
-                className="h-5 w-5 text-gray-600"
+                className="h-5 w-5 text-gray-600 dark:text-gray-200"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -170,14 +184,14 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
               </svg>
             </div>
             <div className="ml-3 flex-1">
-              <p className="text-sm font-medium text-gray-900">
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
                 {user?.name || "User"}
               </p>
-              <p className="text-xs text-gray-500 capitalize">{userType}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">{userType}</p>
             </div>
             <button
               onClick={handleLogout}
-              className="ml-2 p-1 text-gray-400 hover:text-gray-600"
+              className="ml-2 p-1 text-gray-400 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-200"
               title={t("Logout")}
             >
               <svg
@@ -201,11 +215,11 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
       {/* Main Content */}
       <div className="lg:pl-64">
         {/* Top Bar */}
-        <div className="sticky top-0 z-40 bg-white border-b border-gray-200">
+        <div className="sticky top-0 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
             <div className="flex items-center">
               <button
-                className="lg:hidden p-2 text-gray-600 hover:text-gray-900"
+                className="lg:hidden p-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
                 aria-label={t("Open navigation menu")}
                 aria-expanded={isSidebarOpen}
                 aria-controls="mobile-sidebar"
@@ -226,7 +240,7 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
                   />
                 </svg>
               </button>
-              <h1 className="ml-2 text-lg font-semibold text-gray-900">
+              <h1 className="ml-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
                 {currentNav.find((item) => location.pathname === item.href)
                   ?.name || t("Dashboard")}
               </h1>
@@ -234,10 +248,32 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
 
             <div className="flex items-center space-x-4">
               {/* Online Status */}
-              <div className="flex items-center text-sm text-gray-600">
+              <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                 <div className="h-2 w-2 bg-green-400 rounded-full mr-2"></div>
                 {t("Online")}
               </div>
+
+              {/* Theme toggle */}
+              <button
+                onClick={cycleTheme}
+                className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800"
+                title={t("Toggle theme") + `: ${theme}`}
+              >
+                {theme === 'dark' ? (
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M21.752 15.002A9.718 9.718 0 0112 21.75c-5.385 0-9.75-4.365-9.75-9.75 0-4.178 2.638-7.732 6.356-9.12a.75.75 0 01.966.966A8.25 8.25 0 0012 20.25c3.527 0 6.532-2.165 7.75-5.248a.75.75 0 011.002-.37z" />
+                  </svg>
+                ) : theme === 'auto' ? (
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414"/>
+                    <circle cx="12" cy="12" r="4" />
+                  </svg>
+                ) : (
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 3a1 1 0 011 1v1a1 1 0 11-2 0V4a1 1 0 011-1zm0 15a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm9-6a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM6 12a1 1 0 01-1 1H4a1 1 0 110-2h1a1 1 0 011 1zm12.364 6.364a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM7.05 7.05a1 1 0 010 1.414L6.343 9.17A1 1 0 114.93 7.757l.707-.707a1 1 0 011.414 0zm10.607-3.536a1 1 0 010 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM7.05 16.95a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0z" />
+                  </svg>
+                )}
+              </button>
             </div>
           </div>
         </div>

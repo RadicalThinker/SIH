@@ -60,7 +60,7 @@ const StreakCounter: React.FC<StreakCounterProps> = ({
   }
 
   return (
-    <div className={`bg-white rounded-xl shadow-soft ${config.container}`}>
+    <div className={`bg-white dark:bg-white/5 backdrop-blur-sm rounded-xl shadow-soft border border-gray-200 dark:border-gray-800 ${config.container}`}>
       <div className="text-center">
         {/* Streak Icon */}
         <motion.div
@@ -83,7 +83,7 @@ const StreakCounter: React.FC<StreakCounterProps> = ({
         {/* Current Streak */}
         <div className="mb-2">
           <motion.div 
-            className={`font-bold text-gray-800 ${config.number}`}
+            className={`font-bold text-gray-800 dark:text-gray-100 ${config.number}`}
             key={currentStreak}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -91,14 +91,14 @@ const StreakCounter: React.FC<StreakCounterProps> = ({
           >
             {currentStreak}
           </motion.div>
-          <div className={`text-gray-600 ${config.text}`}>
+          <div className={`text-gray-600 dark:text-gray-300 ${config.text}`}>
             {t('progress.currentStreak')}
           </div>
         </div>
 
         {/* Longest Streak */}
         {showLongest && longestStreak > currentStreak && (
-          <div className={`text-gray-500 ${config.text}`}>
+          <div className={`text-gray-500 dark:text-gray-400 ${config.text}`}>
             {t('progress.longestStreak')}: {longestStreak}
           </div>
         )}
@@ -106,32 +106,32 @@ const StreakCounter: React.FC<StreakCounterProps> = ({
         {/* Streak Messages */}
         <div className={`mt-3 ${config.text}`}>
           {currentStreak === 0 && (
-            <div className="text-gray-500">
+            <div className="text-gray-500 dark:text-gray-400">
               {t('Start your learning streak!')}
             </div>
           )}
           {currentStreak >= 1 && currentStreak < 3 && (
-            <div className="text-blue-600">
+            <div className="text-blue-600 dark:text-blue-400">
               {t('Great start! Keep going!')}
             </div>
           )}
           {currentStreak >= 3 && currentStreak < 7 && (
-            <div className="text-green-600">
+            <div className="text-green-600 dark:text-green-400">
               {t('You\'re on fire! 🔥')}
             </div>
           )}
           {currentStreak >= 7 && currentStreak < 14 && (
-            <div className="text-yellow-600">
+            <div className="text-yellow-600 dark:text-yellow-400">
               {t('Amazing streak! ⚡')}
             </div>
           )}
           {currentStreak >= 14 && currentStreak < 30 && (
-            <div className="text-orange-600">
+            <div className="text-orange-600 dark:text-orange-400">
               {t('Incredible dedication! 🏅')}
             </div>
           )}
           {currentStreak >= 30 && (
-            <div className="text-purple-600">
+            <div className="text-purple-600 dark:text-purple-400">
               {t('Legendary learner! 🏆')}
             </div>
           )}

@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "gamification"], // Persist auth and gamification state
+  whitelist: ["auth", "gamification", "ui"], // Persist auth, gamification and UI (theme)
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

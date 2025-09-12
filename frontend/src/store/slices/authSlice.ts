@@ -24,7 +24,9 @@ export const loginStudent = createAsyncThunk(
     try {
       const apiService = (await import("../../services/api")).default;
       const data = await apiService.loginStudent(credentials);
-      apiService.setToken(data.data.token);
+      if (data?.data?.token) {
+        apiService.setToken(data.data.token);
+      }
       return data.data;
     } catch (error: any) {
       return rejectWithValue(error.message);
@@ -38,7 +40,9 @@ export const loginTeacher = createAsyncThunk(
     try {
       const apiService = (await import("../../services/api")).default;
       const data = await apiService.loginTeacher(credentials);
-      apiService.setToken(data.data.token);
+      if (data?.data?.token) {
+        apiService.setToken(data.data.token);
+      }
       return data.data;
     } catch (error: any) {
       return rejectWithValue(error.message);
@@ -98,8 +102,10 @@ const authSlice = createSlice({
       .addCase(loginStudent.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isAuthenticated = true;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        if (action.payload) {
+          state.user = action.payload.user;
+          state.token = action.payload.token;
+        }
         state.error = null;
       })
       .addCase(loginStudent.rejected, (state, action) => {
@@ -115,8 +121,10 @@ const authSlice = createSlice({
       .addCase(loginTeacher.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isAuthenticated = true;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        if (action.payload) {
+          state.user = action.payload.user;
+          state.token = action.payload.token;
+        }
         state.error = null;
       })
       .addCase(loginTeacher.rejected, (state, action) => {
@@ -131,7 +139,9 @@ const authSlice = createSlice({
       .addCase(verifyToken.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isAuthenticated = true;
-        state.user = action.payload.user;
+        if (action.payload) {
+          state.user = action.payload.user;
+        }
       })
       .addCase(verifyToken.rejected, (state, action) => {
         state.isLoading = false;

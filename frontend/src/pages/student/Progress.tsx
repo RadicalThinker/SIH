@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next'; // commented out as unused
 
 interface ProgressData {
   totalPoints: number;
@@ -31,7 +31,7 @@ interface ProgressData {
 }
 
 const Progress: React.FC = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation(); // commented out as unused
   const [activeTab, setActiveTab] = useState<'overview' | 'badges' | 'activity'>('overview');
 
   // Hardcoded progress data
@@ -193,7 +193,7 @@ const Progress: React.FC = () => {
       </div>
 
       {/* Tab Navigation */}
-      <div className="bg-white rounded-lg border border-gray-200 p-1">
+      <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-1">
         <div className="flex space-x-1">
           {tabs.map((tab) => (
             <button
@@ -202,7 +202,7 @@ const Progress: React.FC = () => {
               className={`flex-1 flex items-center justify-center px-4 py-3 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeTab === tab.id
                   ? 'bg-blue-600 text-white shadow-lg'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
               }`}
             >
               <span className="mr-2">{tab.icon}</span>
@@ -216,18 +216,18 @@ const Progress: React.FC = () => {
       {activeTab === 'overview' && (
         <div className="space-y-6">
           {/* Weekly Progress Chart */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Weekly Progress</h3>
+          <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Weekly Progress</h3>
             <div className="space-y-4">
-              {progressData.weeklyProgress.map((day, index) => (
+              {progressData.weeklyProgress.map((day, _index) => (
                 <div key={day.day} className="flex items-center space-x-4">
-                  <div className="w-12 text-sm font-medium text-gray-600">{day.day}</div>
+                  <div className="w-12 text-sm font-medium text-gray-600 dark:text-gray-300">{day.day}</div>
                   <div className="flex-1">
-                    <div className="flex items-center justify-between text-sm text-gray-600 mb-1">
+                    <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-300 mb-1">
                       <span>{day.points} points</span>
                       <span>{day.games} games</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-3">
                       <div
                         className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-1000"
                         style={{ width: `${(day.points / maxPoints) * 100}%` }}
@@ -241,37 +241,37 @@ const Progress: React.FC = () => {
 
           {/* Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">Learning Stats</h4>
+            <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
+              <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Learning Stats</h4>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Games Completed</span>
+                  <span className="text-gray-600 dark:text-gray-300">Games Completed</span>
                   <span className="font-semibold">{progressData.gamesCompleted}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Total Time</span>
+                  <span className="text-gray-600 dark:text-gray-300">Total Time</span>
                   <span className="font-semibold">{progressData.totalTimeSpent} min</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Average Score</span>
+                  <span className="text-gray-600 dark:text-gray-300">Average Score</span>
                   <span className="font-semibold">{Math.round(progressData.totalPoints / progressData.gamesCompleted)}</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">Achievements</h4>
+            <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
+              <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Achievements</h4>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Badges Earned</span>
+                  <span className="text-gray-600 dark:text-gray-300">Badges Earned</span>
                   <span className="font-semibold">{earnedBadges.length}/{progressData.badges.length}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Best Streak</span>
+                  <span className="text-gray-600 dark:text-gray-300">Best Streak</span>
                   <span className="font-semibold">{progressData.streak} days</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Best Accuracy</span>
+                  <span className="text-gray-600 dark:text-gray-300">Best Accuracy</span>
                   <span className="font-semibold">{progressData.accuracy}%</span>
                 </div>
               </div>
@@ -282,16 +282,16 @@ const Progress: React.FC = () => {
 
       {activeTab === 'badges' && (
         <div className="space-y-6">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">All Badges</h3>
+          <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">All Badges</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {progressData.badges.map((badge) => (
                 <div
                   key={badge.id}
                   className={`p-4 rounded-lg border-2 transition-all duration-200 ${
                     badge.earned
-                      ? 'bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-300 shadow-lg'
-                      : 'bg-gray-50 border-gray-200 opacity-60'
+                      ? 'bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/10 dark:to-orange-900/10 border-yellow-300 dark:border-yellow-900/30 shadow-lg'
+                      : 'bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 opacity-60'
                   }`}
                 >
                   <div className="flex items-center space-x-3">
@@ -299,14 +299,14 @@ const Progress: React.FC = () => {
                       {badge.icon}
                     </div>
                     <div className="flex-1">
-                      <h4 className={`font-semibold ${badge.earned ? 'text-gray-900' : 'text-gray-500'}`}>
+                      <h4 className={`font-semibold ${badge.earned ? 'text-gray-900 dark:text-gray-100' : 'text-gray-500 dark:text-gray-400'}`}>
                         {badge.name}
                       </h4>
-                      <p className={`text-sm ${badge.earned ? 'text-gray-600' : 'text-gray-400'}`}>
+                      <p className={`text-sm ${badge.earned ? 'text-gray-600 dark:text-gray-300' : 'text-gray-400 dark:text-gray-500'}`}>
                         {badge.description}
                       </p>
                       {badge.earned && badge.earnedDate && (
-                        <p className="text-xs text-yellow-600 mt-1">
+                        <p className="text-xs text-yellow-600 dark:text-yellow-400 mt-1">
                           Earned on {new Date(badge.earnedDate).toLocaleDateString()}
                         </p>
                       )}
@@ -321,20 +321,20 @@ const Progress: React.FC = () => {
 
       {activeTab === 'activity' && (
         <div className="space-y-6">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
+          <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Recent Activity</h3>
             <div className="space-y-4">
               {progressData.recentActivity.map((activity) => (
-                <div key={activity.id} className="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg">
+                <div key={activity.id} className="flex items-center space-x-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                   <div className="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
                     <span className="text-blue-600 font-bold">+{activity.points}</span>
                   </div>
                   <div className="flex-1">
-                    <p className="font-medium text-gray-900">{activity.action}</p>
-                    <p className="text-sm text-gray-600">{activity.game} • {activity.timestamp}</p>
+                    <p className="font-medium text-gray-900 dark:text-gray-100">{activity.action}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{activity.game} • {activity.timestamp}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium text-green-600">+{activity.points} pts</p>
+                    <p className="text-sm font-medium text-green-600 dark:text-green-400">+{activity.points} pts</p>
                   </div>
                 </div>
               ))}

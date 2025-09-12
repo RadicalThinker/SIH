@@ -22,18 +22,18 @@ const TeacherDashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
               {t('Welcome back, {{name}}!', { name: teacherData.name })}
             </h1>
-            <p className="text-gray-600 mt-1">
+            <p className="text-gray-600 dark:text-gray-300 mt-1">
               {t('Here\'s your class overview and student progress')}
             </p>
           </div>
           <div className="text-right">
-            <div className="text-sm text-gray-500">{t('Teacher')}</div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">{t('Teacher')}</div>
             <div className="text-2xl font-bold text-blue-600">
               {teacherData.stats.totalStudents} {t('Students')}
             </div>
@@ -43,7 +43,7 @@ const TeacherDashboard: React.FC = () => {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
           <div className="flex items-center">
             <div className="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center">
               <svg className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -51,13 +51,13 @@ const TeacherDashboard: React.FC = () => {
               </svg>
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">{t('Total Students')}</p>
-              <p className="text-2xl font-bold text-gray-900">{teacherData.stats.totalStudents}</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{t('Total Students')}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{teacherData.stats.totalStudents}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
           <div className="flex items-center">
             <div className="h-12 w-12 bg-green-100 rounded-lg flex items-center justify-center">
               <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -65,13 +65,13 @@ const TeacherDashboard: React.FC = () => {
               </svg>
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">{t('Active Students')}</p>
-              <p className="text-2xl font-bold text-gray-900">{teacherData.stats.activeStudents}</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{t('Active Students')}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{teacherData.stats.activeStudents}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
           <div className="flex items-center">
             <div className="h-12 w-12 bg-purple-100 rounded-lg flex items-center justify-center">
               <svg className="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -79,13 +79,13 @@ const TeacherDashboard: React.FC = () => {
               </svg>
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">{t('Average Score')}</p>
-              <p className="text-2xl font-bold text-gray-900">{teacherData.stats.averageScore}%</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{t('Average Score')}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{teacherData.stats.averageScore}%</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
           <div className="flex items-center">
             <div className="h-12 w-12 bg-orange-100 rounded-lg flex items-center justify-center">
               <svg className="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -93,8 +93,8 @@ const TeacherDashboard: React.FC = () => {
               </svg>
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">{t('Lessons Completed')}</p>
-              <p className="text-2xl font-bold text-gray-900">{teacherData.stats.lessonsCompleted}</p>
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{t('Lessons Completed')}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{teacherData.stats.lessonsCompleted}</p>
             </div>
           </div>
         </div>
@@ -102,23 +102,23 @@ const TeacherDashboard: React.FC = () => {
 
       {/* Classes Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('My Classes')}</h3>
+        <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t('My Classes')}</h3>
           <div className="space-y-4">
             {teacherData.classes.map((classItem) => (
-              <div key={classItem.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+              <div key={classItem.id} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
                 <div className="flex items-center">
                   <div className="h-10 w-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
                     <span className="text-blue-600 font-bold">{classItem.name.charAt(classItem.name.length - 1)}</span>
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">{classItem.name}</p>
-                    <p className="text-sm text-gray-600">{classItem.subject}</p>
+                    <p className="font-medium text-gray-900 dark:text-gray-100">{classItem.name}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{classItem.subject}</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-medium text-gray-900">{classItem.students} {t('students')}</p>
-                  <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{classItem.students} {t('students')}</p>
+                  <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium">
                     {t('View Details')}
                   </button>
                 </div>
@@ -127,8 +127,8 @@ const TeacherDashboard: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('Quick Actions')}</h3>
+        <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">{t('Quick Actions')}</h3>
           <div className="space-y-3">
             <button className="w-full flex items-center justify-center px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
               <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -153,42 +153,42 @@ const TeacherDashboard: React.FC = () => {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('Recent Activity')}</h3>
         <div className="space-y-4">
-          <div className="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg">
+          <div className="flex items-center space-x-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
             <div className="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center">
               <span className="text-green-600 text-sm">✓</span>
             </div>
             <div className="flex-1">
-              <p className="font-medium text-gray-900">{t('Arjun Singh completed Math Puzzle')}</p>
-              <p className="text-sm text-gray-600">{t('2 hours ago')}</p>
+              <p className="font-medium text-gray-900 dark:text-gray-100">{t('Arjun Singh completed Math Puzzle')}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{t('2 hours ago')}</p>
             </div>
             <div className="text-right">
               <p className="text-sm font-medium text-green-600">+50 pts</p>
             </div>
           </div>
           
-          <div className="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg">
+          <div className="flex items-center space-x-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
             <div className="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center">
               <span className="text-blue-600 text-sm">📚</span>
             </div>
             <div className="flex-1">
-              <p className="font-medium text-gray-900">{t('Priya Patel started Algebra lesson')}</p>
-              <p className="text-sm text-gray-600">{t('4 hours ago')}</p>
+              <p className="font-medium text-gray-900 dark:text-gray-100">{t('Priya Patel started Algebra lesson')}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{t('4 hours ago')}</p>
             </div>
             <div className="text-right">
               <p className="text-sm font-medium text-blue-600">{t('In Progress')}</p>
             </div>
           </div>
           
-          <div className="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg">
+          <div className="flex items-center space-x-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
             <div className="h-8 w-8 bg-yellow-100 rounded-full flex items-center justify-center">
               <span className="text-yellow-600 text-sm">🏆</span>
             </div>
             <div className="flex-1">
-              <p className="font-medium text-gray-900">{t('Rahul Verma earned Math Wizard badge')}</p>
-              <p className="text-sm text-gray-600">{t('1 day ago')}</p>
+              <p className="font-medium text-gray-900 dark:text-gray-100">{t('Rahul Verma earned Math Wizard badge')}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{t('1 day ago')}</p>
             </div>
             <div className="text-right">
               <p className="text-sm font-medium text-yellow-600">+25 pts</p>

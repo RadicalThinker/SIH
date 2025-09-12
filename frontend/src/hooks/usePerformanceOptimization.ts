@@ -256,6 +256,8 @@ export const useBatteryOptimization = () => {
   const [isCharging, setIsCharging] = useState(true)
 
   useEffect(() => {
+    let cleanup: (() => void) | undefined;
+
     const initBattery = async () => {
       if ('getBattery' in navigator) {
         try {
@@ -270,7 +272,7 @@ export const useBatteryOptimization = () => {
           battery.addEventListener('levelchange', handleLevelChange)
           battery.addEventListener('chargingchange', handleChargingChange)
 
-          return () => {
+          cleanup = () => {
             battery.removeEventListener('levelchange', handleLevelChange)
             battery.removeEventListener('chargingchange', handleChargingChange)
           }
@@ -280,8 +282,13 @@ export const useBatteryOptimization = () => {
       }
     }
 
-    const cleanup = initBattery()
-    return () => cleanup?.then(fn => fn?.())
+    initBattery()
+    
+    return () => {
+      if (cleanup) {
+        cleanup()
+      }
+    }
   }, [])
 
   const shouldReduceFeatures = batteryLevel < 0.2 && !isCharging

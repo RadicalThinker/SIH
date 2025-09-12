@@ -12,7 +12,7 @@ const LudoBoard: React.FC<LudoBoardProps> = ({ gameState, onPieceClick, selected
   // Generate board tiles with questions
   const generateTiles = (): LudoTile[] => {
     const tiles: LudoTile[] = [];
-    const boardSize = 15;
+    // const boardSize = 15; // commented out as unused
     const tileSize = 40;
     
     // Create a simplified Ludo board layout

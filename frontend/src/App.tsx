@@ -27,6 +27,7 @@ function App() {
   const { i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const { token, isAuthenticated } = useAppSelector((state) => state.auth);
+  const { theme } = useAppSelector((state) => state.ui);
 
   // Check authentication status on app load
   useEffect(() => {
@@ -49,9 +50,24 @@ function App() {
     };
   }, [dispatch]);
 
+  // Apply theme to document element; support 'auto' via prefers-color-scheme
+  useEffect(() => {
+    const root = document.documentElement;
+    const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = theme === 'dark' || (theme === 'auto' && systemPrefersDark);
+    root.classList.toggle('dark', isDark);
+  }, [theme]);
+
+  // Initialize theme from system on first load if set to auto
+  useEffect(() => {
+    // If no theme set yet (e.g., default), keep initial 'light'; user can switch to 'auto'
+    // Optionally, uncomment below to default to system preference
+    // if (!theme) dispatch(setTheme('auto'));
+  }, [dispatch]);
+
   return (
     <div
-      className="min-h-screen bg-white"
+      className="min-h-screen bg-white dark:bg-gray-900"
       dir={i18n.language === "ar" ? "rtl" : "ltr"}
     >
       <Suspense fallback={<LoadingSpinner />}>

@@ -154,6 +154,11 @@ const detectGPUCapability = async (): Promise<'low' | 'medium' | 'high'> => {
     
     if (!gl) return 'low'
 
+    // Ensure we have a WebGL context
+    if (!(gl instanceof WebGLRenderingContext) && !(gl instanceof WebGL2RenderingContext)) {
+      return 'medium'
+    }
+
     const debugInfo = gl.getExtension('WEBGL_debug_renderer_info')
     if (!debugInfo) return 'medium'
 

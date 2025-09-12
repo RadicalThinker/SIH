@@ -44,7 +44,11 @@ const StudentLogin: React.FC = () => {
 
     try {
       const result = await dispatch(loginStudent(formData)).unwrap();
-      toast.success(`Welcome back, ${result.user.name}!`);
+      if (result && result.user && result.user.name) {
+        toast.success(`Welcome back, ${result.user.name}!`);
+      } else {
+        toast.success('Welcome back!');
+      }
       navigate('/student/dashboard');
     } catch (error: any) {
       toast.error(error || 'Login failed');
@@ -52,7 +56,7 @@ const StudentLogin: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
         {/* Header */}
         <div className="text-center mb-8">
@@ -61,19 +65,19 @@ const StudentLogin: React.FC = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
             {t('Student Login')}
           </h2>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
             {t('Enter your credentials to access your learning dashboard')}
           </p>
         </div>
 
         {/* Login Form */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-6">
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="pin" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="pin" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t('PIN')}
               </label>
               <input
@@ -83,7 +87,7 @@ const StudentLogin: React.FC = () => {
                 required
                 value={formData.pin}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-center text-lg tracking-widest"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-center text-lg tracking-widest bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 placeholder="••••"
                 maxLength={4}
                 pattern="[0-9]{4}"
@@ -92,7 +96,7 @@ const StudentLogin: React.FC = () => {
             </div>
             
             <div>
-              <label htmlFor="className" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="className" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 {t('Class Name')}
               </label>
               <input
@@ -102,20 +106,20 @@ const StudentLogin: React.FC = () => {
                 required
                 value={formData.className}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 placeholder={t('Enter your Class Name')}
                 disabled={isLoading}
               />
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 rounded-md p-3">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/40 rounded-md p-3">
                 <div className="flex">
                   <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                   </svg>
                   <div className="ml-3">
-                    <p className="text-sm text-red-800">{error}</p>
+                    <p className="text-sm text-red-800 dark:text-red-300">{error}</p>
                   </div>
                 </div>
               </div>
@@ -142,16 +146,16 @@ const StudentLogin: React.FC = () => {
         </div>
 
         {/* Demo Credentials */}
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-md p-4">
+        <div className="mt-6 bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-900/30 rounded-md p-4">
           <div className="flex">
             <svg className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
             </svg>
             <div className="ml-3">
-              <h3 className="text-sm font-medium text-blue-800">
+              <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300">
                 {t('Demo Credentials')}
               </h3>
-              <div className="mt-1 text-sm text-blue-700">
+              <div className="mt-1 text-sm text-blue-700 dark:text-blue-300">
                 <p><strong>PIN:</strong> 1234</p>
                 <p><strong>Class Name:</strong> Grade 6A</p>
               </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Game } from '@types/index'
+// import MathPuzzleGame from './MathPuzzleGame' // commented out as unused
+import { Game } from '../../types/index'
 
 interface MathPuzzleProps {
   game: Game

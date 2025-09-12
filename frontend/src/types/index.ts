@@ -30,6 +30,7 @@ export interface StudentStats {
   totalPoints: number
   level: number
   streak: number
+  longestStreak?: number
   badgesEarned: number
   lessonsCompleted: number
   gamesPlayed: number

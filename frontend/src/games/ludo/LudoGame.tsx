@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { LudoGameState, LudoPlayer, LudoQuestion, LudoPiece } from './types';
+import { LudoGameState, LudoQuestion, LudoPiece } from './types';
 import LudoBoard from './LudoBoard';
 import LudoDice from './LudoDice';
 import LudoQuestionModal from './LudoQuestionModal';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next'; // commented out as unused
 
 interface Lesson {
   id: string;
@@ -16,7 +16,7 @@ interface Lesson {
 }
 
 const Lessons: React.FC = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation(); // commented out as unused
   const [selectedSubject, setSelectedSubject] = useState<string>('all');
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all');
 
@@ -183,10 +183,10 @@ const Lessons: React.FC = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-800 p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Filter by Subject</h3>
+            <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Filter by Subject</h3>
             <div className="flex flex-wrap gap-2">
               {subjects.map((subject) => (
                 <button
@@ -195,7 +195,7 @@ const Lessons: React.FC = () => {
                   className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
                     selectedSubject === subject
                       ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700'
                   }`}
                 >
                   {subject}
@@ -205,7 +205,7 @@ const Lessons: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Filter by Difficulty</h3>
+            <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Filter by Difficulty</h3>
             <div className="flex flex-wrap gap-2">
               {difficulties.map((difficulty) => (
                 <button
@@ -214,7 +214,7 @@ const Lessons: React.FC = () => {
                   className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
                     selectedDifficulty === difficulty
                       ? 'bg-green-600 text-white shadow-lg'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700'
                   }`}
                 >
                   {difficulty}
@@ -230,10 +230,10 @@ const Lessons: React.FC = () => {
         {filteredLessons.map((lesson) => (
           <div
             key={lesson.id}
-            className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:transform hover:scale-105"
+            className="bg-white dark:bg-white/5 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-lg transition-all duration-300 hover:transform hover:scale-105"
           >
             {/* Lesson Thumbnail */}
-            <div className="h-32 bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center">
+            <div className="h-32 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10 flex items-center justify-center">
               <span className="text-6xl">{lesson.thumbnail}</span>
             </div>
 
@@ -241,14 +241,14 @@ const Lessons: React.FC = () => {
             <div className="p-6">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">{lesson.title}</h3>
-                  <p className="text-sm text-gray-600 mb-2">{lesson.description}</p>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">{lesson.title}</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{lesson.description}</p>
                 </div>
                 <div className="text-right">
                   <div className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                    lesson.difficulty === 'Beginner' ? 'bg-green-100 text-green-800' :
-                    lesson.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-red-100 text-red-800'
+                    lesson.difficulty === 'Beginner' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' :
+                    lesson.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300' :
+                    'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
                   }`}>
                     {lesson.difficulty}
                   </div>
@@ -258,11 +258,11 @@ const Lessons: React.FC = () => {
               {/* Progress Bar */}
               {!lesson.completed && lesson.progress > 0 && (
                 <div className="mb-4">
-                  <div className="flex justify-between text-sm text-gray-600 mb-1">
+                  <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300 mb-1">
                     <span>Progress</span>
                     <span>{lesson.progress}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-2">
                     <div
                       className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-300"
                       style={{ width: `${lesson.progress}%` }}
@@ -273,15 +273,15 @@ const Lessons: React.FC = () => {
 
               {/* Lesson Info */}
               <div className="space-y-2 mb-4">
-                <div className="flex items-center text-sm text-gray-600">
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                   <span className="mr-2">📚</span>
                   <span>{lesson.subject}</span>
                 </div>
-                <div className="flex items-center text-sm text-gray-600">
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                   <span className="mr-2">⏱️</span>
                   <span>{lesson.duration} minutes</span>
                 </div>
-                <div className="flex items-center text-sm text-gray-600">
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                   <span className="mr-2">⭐</span>
                   <span>{lesson.points} points</span>
                 </div>
@@ -289,12 +289,12 @@ const Lessons: React.FC = () => {
 
               {/* Topics */}
               <div className="mb-4">
-                <p className="text-xs font-medium text-gray-700 mb-2">Topics covered:</p>
+                <p className="text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">Topics covered:</p>
                 <div className="flex flex-wrap gap-1">
                   {lesson.topics.map((topic, index) => (
                     <span
                       key={index}
-                      className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-md"
+                      className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-xs rounded-md"
                     >
                       {topic}
                     </span>
@@ -306,7 +306,7 @@ const Lessons: React.FC = () => {
               <button
                 className={`w-full py-2.5 px-4 rounded-lg font-medium transition-all duration-200 ${
                   lesson.completed
-                    ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                    ? 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-900/50'
                     : lesson.progress > 0
                     ? 'bg-blue-600 text-white hover:bg-blue-700'
                     : 'bg-gray-600 text-white hover:bg-gray-700'

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 interface LudoDiceProps {
   value: number;
@@ -23,7 +23,7 @@ const LudoDice: React.FC<LudoDiceProps> = ({ value, isRolling, canRoll, onRoll }
   };
 
   const getDiceDots = (num: number) => {
-    const dots = [];
+    // const dots = []; // commented out as unused
     const positions = [
       [], // 0 (not used)
       [[0.5, 0.5]], // 1

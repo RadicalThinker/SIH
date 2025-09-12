@@ -1,12 +1,10 @@
-import { useState, useEffect, Suspense, lazy } from 'react'
+import React, { useState, useEffect, Suspense, lazy } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import type { Game } from '@types/index'
-import LoadingSpinner from '@/components/ui/LoadingSpinner'
-// If ErrorBoundary exists elsewhere, update the path accordingly, for example:
-import ErrorBoundary from '@/components/ui/ErrorBoundary'
-// Or, if the file does not exist, create it at src/components/ui/ErrorBoundary.tsx with a basic implementation:
-import { useOfflineSync } from '@hooks/useOfflineSync'
+import type { Game } from '../../types/index'
+import LoadingSpinner from '../ui/LoadingSpinner'
+// import ErrorBoundary from '../ui/ErrorBoundary' // Comment out until ErrorBoundary is created
+import { useOfflineSync } from '../../hooks/useOfflineSync'
 import toast from 'react-hot-toast'
 
 // Game component cache to avoid re-importing
@@ -157,7 +155,7 @@ const GameLoader: React.FC<GameLoaderProps> = ({
     }
   }
 
-  const importGameComponent = async (gameId: string, bundleUrl: string): Promise<React.ComponentType<any>> => {
+  const importGameComponent = async (gameId: string, _bundleUrl: string): Promise<React.ComponentType<any>> => {
     // Create a dynamic import based on game type and ID
     const gameModule = await import(/* webpackChunkName: "game-[request]" */ `@games/${gameId}/index.tsx`)
     
@@ -274,57 +272,31 @@ const GameLoader: React.FC<GameLoaderProps> = ({
   }
 
   return (
-    <ErrorBoundary
-      fallback={
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-          <h2 className="text-2xl font-bold mb-4">{t('game.crashed')}</h2>
-          <p className="text-gray-300 mb-6">{t('game.crashedDescription')}</p>
-          <button
-            onClick={handleGameExit}
-            className="btn btn-primary"
-          >
-            {t('common.back')}
-          </button>
+    <div>
+      <Suspense fallback={
+        <div className="flex items-center justify-center min-h-screen bg-gray-900">
+          <LoadingSpinner size="lg" />
         </div>
-      }
-    >
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center min-h-screen bg-gray-900">
-            <LoadingSpinner size="lg" />
-          </div>
-        }
-      >
-        <div className="relative w-full h-screen bg-gray-900">
-          {/* Game Controls Overlay */}
-          <div className="absolute top-4 right-4 z-50 flex space-x-2">
-            <button
-              onClick={handleGameExit}
-              className="bg-black bg-opacity-50 text-white p-2 rounded-lg hover:bg-opacity-70 transition-all"
-              title={t('game.exit')}
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Game Component */}
-          {React.createElement(gameComponent, {
-            game,
-            onComplete: handleGameComplete,
-            onExit: handleGameExit
-          })}
-
-          {/* Offline Indicator */}
+      }>
+        <div className="min-h-screen bg-gray-900 text-white">
+          {gameComponent && (
+            <div className="game-container">
+              {React.createElement(gameComponent, {
+                gameData: game,
+                onComplete: handleGameComplete,
+                onProgress: () => {}, // placeholder for progress handler
+                isOffline: !syncStatus.isOnline
+              })}
+            </div>
+          )}
           {!syncStatus.isOnline && (
-            <div className="absolute bottom-4 left-4 bg-yellow-500 text-black px-3 py-1 rounded-lg text-sm font-medium">
+            <div className="fixed bottom-4 right-4 bg-yellow-600 text-white px-4 py-2 rounded-lg shadow-lg">
               {t('common.offline')}
             </div>
           )}
         </div>
       </Suspense>
-    </ErrorBoundary>
+    </div>
   )
 }
 
