@@ -131,9 +131,6 @@ const Games: React.FC = () => {
     }
   ];
 
-  // Combine all games for stats calculation
-  const allGames = [...availableGames, ...comingSoonGames];
-
   const difficulties = ['all', 'Easy', 'Medium', 'Hard'];
   
   // Filter available games only for the filter functionality
