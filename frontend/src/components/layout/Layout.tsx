@@ -4,6 +4,11 @@ import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { logout } from "../../store/slices/authSlice";
 import { useTranslation } from "react-i18next";
 import { setTheme } from "../../store/slices/uiSlice";
+import { 
+  SunIcon, 
+  MoonIcon, 
+  ComputerDesktopIcon 
+} from "@heroicons/react/24/outline";
 
 interface LayoutProps {
   userType: "student" | "teacher" | "admin";
@@ -256,23 +261,21 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
               {/* Theme toggle */}
               <button
                 onClick={cycleTheme}
-                className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800"
+                className="relative p-2.5 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 transition-all duration-200 group"
                 title={t("Toggle theme") + `: ${theme}`}
               >
-                {theme === 'dark' ? (
-                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M21.752 15.002A9.718 9.718 0 0112 21.75c-5.385 0-9.75-4.365-9.75-9.75 0-4.178 2.638-7.732 6.356-9.12a.75.75 0 01.966.966A8.25 8.25 0 0012 20.25c3.527 0 6.532-2.165 7.75-5.248a.75.75 0 011.002-.37z" />
-                  </svg>
-                ) : theme === 'auto' ? (
-                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414"/>
-                    <circle cx="12" cy="12" r="4" />
-                  </svg>
-                ) : (
-                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M12 3a1 1 0 011 1v1a1 1 0 11-2 0V4a1 1 0 011-1zm0 15a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm9-6a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM6 12a1 1 0 01-1 1H4a1 1 0 110-2h1a1 1 0 011 1zm12.364 6.364a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM7.05 7.05a1 1 0 010 1.414L6.343 9.17A1 1 0 114.93 7.757l.707-.707a1 1 0 011.414 0zm10.607-3.536a1 1 0 010 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM7.05 16.95a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0z" />
-                  </svg>
-                )}
+                <div className="relative w-5 h-5">
+                  {theme === 'dark' ? (
+                    <MoonIcon className="w-5 h-5 text-blue-500 dark:text-blue-400 group-hover:scale-110 transition-transform duration-200" />
+                  ) : theme === 'auto' ? (
+                    <ComputerDesktopIcon className="w-5 h-5 text-purple-500 dark:text-purple-400 group-hover:scale-110 transition-transform duration-200" />
+                  ) : (
+                    <SunIcon className="w-5 h-5 text-orange-500 dark:text-orange-400 group-hover:scale-110 transition-transform duration-200" />
+                  )}
+                </div>
+                
+                {/* Theme indicator dot */}
+                <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 opacity-75 group-hover:opacity-100 transition-opacity duration-200"></div>
               </button>
             </div>
           </div>
