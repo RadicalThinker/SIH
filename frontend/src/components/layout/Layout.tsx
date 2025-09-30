@@ -130,7 +130,7 @@ const Layout: React.FC<LayoutProps> = ({ userType, children }) => {
               </svg>
             </div>
             <span className="ml-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
-              STEMशक्ति
+             NabhaShiksha/ਨਾਭਾ ਸਿੱਖਿਆ
             </span>
           </div>
         </div>

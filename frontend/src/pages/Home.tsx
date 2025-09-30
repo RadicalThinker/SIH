@@ -29,7 +29,7 @@ const Home: React.FC = () => {
                   </svg>
                 </div>
                 <span className="ml-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
-                  STEMशक्ति
+                 NabhaShiksha/ਨਾਭਾ ਸਿੱਖਿਆ
                 </span>
               </div>
             </div>
@@ -112,7 +112,7 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              {t("Why Choose STEMशक्ति?")}
+              {t("Why ChooseNabhaShiksha/ਨਾਭਾ ਸਿੱਖਿਆ?")}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               {t(
@@ -211,7 +211,7 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center text-gray-600 dark:text-gray-400">
             <p>
-              &copy; 2025 STEMशक्ति.{" "}
+              &copy; 2025NabhaShiksha/ਨਾਭਾ ਸਿੱਖਿਆ.{" "}
               {t("Empowering rural education through technology.")}
             </p>
           </div>
